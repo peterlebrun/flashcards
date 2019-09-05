@@ -2,34 +2,17 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>MathJax example</title>
+    <title>Flash Cards!</title>
     <script type="text/javascript" async
             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async>
     </script>
+    <link rel="stylesheet" type="text/css" href="./style.css">
   </head>
   <body>
-
-    <p>
-      <h1>Finance</h1>
-      <h3>Black Scholes</h3>
-      \(\partial V \over \partial t\) + \(1 \over 2\)\(\sigma^2\)\(S^2\)\(\partial^2 V \over \partial S^2\) + \(rS\)\(\partial V \over \partial S\) - \(rV\) = 0
-      <br>
-      <br>
-      OR
-      <br>
-      <br>
-      \(\Theta\) + \(1 \over 2\)\(\sigma^2\)\(S^2\)\(\Gamma\) + \(rS\)\(\Delta\) - \(rV\) = 0
-    </p>
-    <p>
-      <h1>Negotiation</h1>
-      <h3></h3>
-    </p>
-
-    <p>
-      <h1>Hebrew Letters</h1>
-      <h3>Aleph</h3>
-      &#1488;
-    </p>
-
+    <div id="container">
+      <div id="flashCard"></div>
+      <button id="newCardButton">New Card</button>
+    </div>
+    <script type="text/javascript" src="./flashcards.js"></script>
   </body>
 </html>
