@@ -21,16 +21,16 @@ const flashCardData = [
     back: "Hǎo",
   },
   {
-    front: "Goodbye",
-    back: "再见",
+    front: "再见",
+    back: "Goodbye",
   },
   {
-    front: "Zài",
-    back: "再",
+    front: "再",
+    back: "Zài",
   },
   {
-    front: "Jiàn",
-    back: "见",
+    front: "见",
+    back: "Jiàn",
   }
 ];
 
