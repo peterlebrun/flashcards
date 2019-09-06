@@ -6,6 +6,12 @@
   "author": "peterlebrun@gmail.com",
   "license": "MIT",
   "devDependencies": {
-    "webpack": "4.39.3"
-  }
+    "webpack": "4.39.3",
+    "webpack-cli": "3.3.8"
+  },
+  "dependencies": {
+    "lodash": "4.17.15",
+    "mathjax": "3.0.0"
+  },
+  "private": true
 }
