@@ -13,5 +13,8 @@
     "lodash": "4.17.15",
     "mathjax": "3.0.0"
   },
-  "private": true
+  "private": true,
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  }
 }
