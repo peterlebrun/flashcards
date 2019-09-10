@@ -13,7 +13,7 @@ resource "aws_security_group" "lb_external" {
   egress {
     from_port   = 0
     to_port     = 0
-    protocol    = "tcp"
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -33,13 +33,15 @@ resource "aws_security_group" "lb_target" {
     to_port   = 8080
     protocol  = "tcp"
 
-    cidr_blocks = ["0.0.0.0/0"]
+    security_groups = [
+      "${aws_security_group.lb_external.id}",
+    ]
   }
 
   egress {
     from_port = 0
     to_port   = 0
-    protocol  = "tcp"
+    protocol  = "-1"
 
     cidr_blocks = ["0.0.0.0/0"]
   }
@@ -48,19 +50,6 @@ resource "aws_security_group" "lb_target" {
     Name          = "pl-ops-lb-target"
     business-unit = "platform"
     managed-by    = "terraform"
-  }
-}
-
-resource "aws_security_group" "instance" {
-  name        = "test_http_access"
-  description = "Temporary SG for testing access"
-  vpc_id      = "${aws_vpc.main-vpc.id}"
-
-  ingress {
-    from_port   = "${var.server_port}"
-    to_port     = "${var.server_port}"
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 

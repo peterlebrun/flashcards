@@ -21,7 +21,7 @@ resource "aws_instance" "server" {
   vpc_security_group_ids = [
     "${aws_security_group.lb_target.id}",
     "${aws_security_group.ssh_and_ping.id}",
-    "${aws_security_group.instance.id}"
+#    "${aws_security_group.instance.id}"
   ]
 
   user_data = <<-EOF

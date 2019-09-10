@@ -54,9 +54,9 @@ resource "aws_alb_target_group" "deeznutz" {
 
   health_check {
     healthy_threshold   = 2
-    unhealthy_threshold = 2
+    unhealthy_threshold = 5
     timeout             = 5
-    interval            = 10
+    interval            = 30
     path                = "/"
     matcher             = "200"
   }
