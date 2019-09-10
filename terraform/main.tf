@@ -37,3 +37,9 @@ resource "aws_instance" "server" {
     Name = "test-api-server"
   }
 }
+
+resource "aws_alb_target_group_attachment" "deeznutz" {
+  target_group_arn = "${aws_alb_target_group.deeznutz.arn}"
+  target_id        = "${aws_instance.server.id}"
+  port             = 8080
+}
