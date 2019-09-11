@@ -12,16 +12,15 @@ module.exports = {
       {
         test:/\.css$/,
         use:['style-loader','css-loader']
-      }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
+      },
     ]
   },
   devServer: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8888',
-        pathRewrite: {'^/api' : ''},
-      }
-    },
     contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
     port: 9000
