@@ -29,8 +29,8 @@ resource "aws_security_group" "lb_target" {
   vpc_id      = "${aws_vpc.main-vpc.id}"
 
   ingress {
-    from_port = 8080
-    to_port   = 8080
+    from_port = 8888
+    to_port   = 8888
     protocol  = "tcp"
 
     security_groups = [

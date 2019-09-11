@@ -21,13 +21,16 @@ resource "aws_instance" "server" {
   vpc_security_group_ids = [
     "${aws_security_group.lb_target.id}",
     "${aws_security_group.ssh_and_ping.id}",
-#    "${aws_security_group.instance.id}"
   ]
 
   user_data = <<-EOF
               #!/bin/bash
-              echo "Hello, World" > index.html
-              nohup busybox httpd -f -p "${var.server_port}" &
+              sudo apt-get -y install git node
+              mkdir /home/ubuntu/app
+              cd /home/ubuntu/app
+              git clone https://github.com/peterlebrun/flashcards.git
+              cd flashcards/app
+              nohup node server.js &
               EOF
 
   key_name = "${var.key_pair}"
@@ -41,5 +44,5 @@ resource "aws_instance" "server" {
 resource "aws_alb_target_group_attachment" "deeznutz" {
   target_group_arn = "${aws_alb_target_group.deeznutz.arn}"
   target_id        = "${aws_instance.server.id}"
-  port             = 8080
+  port             = 8888
 }

@@ -49,15 +49,15 @@ resource "aws_alb_listener_rule" "deeznutz" {
 
 resource "aws_alb_target_group" "deeznutz" {
   vpc_id   = "${aws_vpc.main-vpc.id}"
-  port     = 8080
+  port     = 8888
   protocol = "HTTP"
 
   health_check {
     healthy_threshold   = 2
     unhealthy_threshold = 5
     timeout             = 5
-    interval            = 30
-    path                = "/"
+    interval            = 10
+    path                = "/health"
     matcher             = "200"
   }
 
