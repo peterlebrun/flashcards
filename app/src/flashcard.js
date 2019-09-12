@@ -5,16 +5,23 @@ export default class FlashCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      front: props.front,
-      back: props.back
+      displayText: props.front,
+      isFront: true,
     };
   }
 
+  // I _should_ be able to define this with fat arrows.  Babel error?
+  handleClick = () => {
+    this.setState((state, props) => ({
+      displayText: state.isFront ? props.back : props.front,
+      isFront: !state.isFront
+    }));
+  };
+
   render() {
     return (
-      <div className="flashcard">
-        Front:<h2>{this.state.front}</h2>
-        Back:<h2>{this.state.back}</h2>
+      <div className="flashcard" onClick={this.handleClick}>
+        <h2>{this.state.displayText}</h2>
       </div>
     );
   };
