@@ -10,7 +10,6 @@ export default class FlashCard extends React.Component {
     };
   }
 
-  // I _should_ be able to define this with fat arrows.  Babel error?
   handleClick = () => {
     this.setState((state, props) => ({
       displayText: state.isFront ? props.back : props.front,
