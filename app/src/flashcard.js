@@ -9,7 +9,7 @@ export default class FlashCard extends React.Component {
   render() {
     return (
       <div className="flashcard" onClick={this.props.onClick}>
-        <h2>{this.props.front}</h2>
+        <h2>{this.props.displayText}</h2>
       </div>
     );
   };

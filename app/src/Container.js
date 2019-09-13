@@ -9,6 +9,8 @@ export default class Container extends React.Component {
     this.state = {
       cardData: [],
       currentCard: {},
+      displayText: '',
+      isFront: true
     };
   }
 
@@ -18,14 +20,24 @@ export default class Container extends React.Component {
       .then(data => {
         let cardData = data.data;
         let currentCard = cardData[0]; // This will break if cardData.length < 1
-        this.setState((state, props) => ({ cardData, currentCard }));
+        let displayText = currentCard.front;
+        this.setState((state, props) => ({
+          cardData,
+          currentCard,
+          displayText,
+        }));
       });
   }
 
   handleCardClick = () => {
     console.log('Card Clicked');
-    // Flip card from front to back
-    // Define card flip
+    this.setState((state, props) => {
+      console.log(state);
+      return {
+        displayText: state.isFront ? state.currentCard.back : state.currentCard.front,
+        isFront: !state.isFront,
+      };
+    });
   }
 
   handleButtonClick = () => {
@@ -38,8 +50,7 @@ export default class Container extends React.Component {
     return (
       <div>
         <FlashCard
-          front={this.state.currentCard.front}
-          back={this.state.currentCard.back}
+          displayText={this.state.displayText}
           onClick={this.handleCardClick}/>
       </div>
     );
