@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import FlashCard from './FlashCard';
 import './style.css';
 const DATA_URL = 'https://www.dee-znutz.com/api';
@@ -19,7 +20,7 @@ export default class Container extends React.Component {
       .then(response => response.json())
       .then(data => {
         let cardData = data.data;
-        let currentCard = cardData[0]; // This will break if cardData.length < 1
+        let currentCard = _.sample(cardData); // This will break if cardData.length < 1
         let displayText = currentCard.front;
         this.setState((state, props) => ({
           cardData,
@@ -30,9 +31,7 @@ export default class Container extends React.Component {
   }
 
   handleCardClick = () => {
-    console.log('Card Clicked');
     this.setState((state, props) => {
-      console.log(state);
       return {
         displayText: state.isFront ? state.currentCard.back : state.currentCard.front,
         isFront: !state.isFront,
@@ -41,17 +40,27 @@ export default class Container extends React.Component {
   }
 
   handleButtonClick = () => {
-    console.log('Button Clicked');
-    // Get next card
-    // Define next button
+    let currentCard = _.sample(this.state.cardData);
+    this.setState({
+      currentCard,
+      displayText: currentCard.front,
+      isFront: true,
+    });
   }
 
   render() {
     return (
-      <div>
+      <div className="container">
+        <h1>Cartões de Estudo</h1>
         <FlashCard
           displayText={this.state.displayText}
           onClick={this.handleCardClick}/>
+        <button
+          className="nextCardButton"
+          onClick={this.handleButtonClick}
+        >
+          Next Card
+        </button>
       </div>
     );
   }

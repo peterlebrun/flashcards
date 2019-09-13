@@ -1,6 +1,6 @@
 .container {
     text-align: center;
-    width: 450px;
+    width: 400px;
 }
 
 .flashcard {
@@ -12,4 +12,11 @@
     box-shadow: 1px 1px;
     text-align: center;
     vertical-align: middle;
+}
+
+.nextCardButton {
+    height: 40px;
+    width: 100px;
+    margin: 10px;
+    border-radius: 5px;
 }
