@@ -1,21 +1,15 @@
-#container {
+.container {
     text-align: center;
     width: 450px;
 }
 
-#flashCard {
+.flashcard {
     display: table-cell;
-    width: 450px;
-    height: 278px; /* Approx golden ratio */
-    border: 1px solid black;
+    height: 250px;
+    width: 400px;
+    border: 1px solid grey;
+    border-radius: 20px;
+    box-shadow: 1px 1px;
     text-align: center;
-    font-size: 80px;
     vertical-align: middle;
-}
-
-#newCardButton {
-    width: 120px;
-    height: 55px;
-    margin: 10px;
-    font-size: 20px;
 }

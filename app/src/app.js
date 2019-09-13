@@ -1,11 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FlashCard from './flashcard';
+import Container from './Container';
 
-const App = () => (
-  <div>
-    <FlashCard front="Hey" back="weirdo"/>
-  </div>
-);
+const App = () => <Container/>;
 
 ReactDOM.render(<App/>, document.getElementById('root'));
