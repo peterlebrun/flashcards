@@ -2,13 +2,11 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = 8888;
-const cors = require('cors');
 // This will be replaced with a proper database at some point no futuro
 const data = require('./data.json');
 
-
-app.use(cors());
 app.get('/api', (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
   res.json(data);
 });
 
