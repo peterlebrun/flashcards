@@ -1,6 +1,7 @@
 import React from 'react';
 import FlashCard from './FlashCard';
 import './style.css';
+const DATA_URL = 'https://www.dee-znutz.com/api';
 
 export default class Container extends React.Component {
   constructor(props) {
@@ -16,6 +17,10 @@ export default class Container extends React.Component {
   }
 
   componentDidMount() {
+    fetch(DATA_URL, { mode: 'cors' })
+      .then(response => console.log(response)); //response.json())
+      //.then(data => console.log(data.data));
+    /*
     // Fetch data API here
     this.setState((state, props) => {
       return {
@@ -31,6 +36,7 @@ export default class Container extends React.Component {
         ],
       };
     });
+    */
   }
 
   handleCardClick = () => {
