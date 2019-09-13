@@ -8,49 +8,39 @@ export default class Container extends React.Component {
     super(props);
     this.state = {
       cardData: [],
-      currentCard: {
-        front: 'FooFront',
-        back: 'FooBack',
-        isFront: true,
-      },
+      currentCard: {},
     };
   }
 
   componentDidMount() {
-    fetch(DATA_URL, { mode: 'cors' })
-      .then(response => console.log(response)); //response.json())
-      //.then(data => console.log(data.data));
-    /*
-    // Fetch data API here
-    this.setState((state, props) => {
-      return {
-        cardData: [
-          {
-            front: 'Front1',
-            back: 'Back1',
-          },
-          {
-            front: 'Front2',
-            back: 'Back2',
-          },
-        ],
-      };
-    });
-    */
+    fetch(DATA_URL)
+      .then(response => response.json())
+      .then(data => {
+        let cardData = data.data;
+        let currentCard = cardData[0]; // This will break if cardData.length < 1
+        this.setState((state, props) => ({ cardData, currentCard }));
+      });
   }
 
   handleCardClick = () => {
+    console.log('Card Clicked');
+    // Flip card from front to back
     // Define card flip
   }
 
   handleButtonClick = () => {
+    console.log('Button Clicked');
+    // Get next card
     // Define next button
   }
 
   render() {
     return (
       <div>
-        <FlashCard front={this.state.currentCard.front} back={this.state.currentCard.back} onClick={this.handleCardClick}/>
+        <FlashCard
+          front={this.state.currentCard.front}
+          back={this.state.currentCard.back}
+          onClick={this.handleCardClick}/>
       </div>
     );
   }
