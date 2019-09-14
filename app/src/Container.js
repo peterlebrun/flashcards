@@ -2,7 +2,8 @@ import React from 'react';
 import _ from 'lodash';
 import FlashCard from './FlashCard';
 import './style.css';
-const DATA_URL = 'https://www.dee-znutz.com/api';
+//const DATA_URL = 'https://www.dee-znutz.com/api';
+const DATA_URL = 'http://localhost:8888/api';
 
 export default class Container extends React.Component {
   constructor(props) {
@@ -16,7 +17,15 @@ export default class Container extends React.Component {
   }
 
   componentDidMount() {
-    fetch(DATA_URL)
+    fetch(DATA_URL, {
+      method: 'GET',
+      mode: 'cors',
+      headers: new Headers({
+        'foo': 'bar',
+        'Express-Auth-Token': 'FAKE-AUTH-TOKEN',
+        'Content-Type': 'application/json',
+      })
+    })
       .then(response => response.json())
       .then(data => {
         let cardData = data.data;
