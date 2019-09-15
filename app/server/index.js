@@ -3,8 +3,10 @@ const path = require('path');
 const app = express();
 const port = 8888;
 // This will be replaced with a proper database at some point no futuro
-const data = require('./data.json');
+const data = require('./data/data.json');
 const TOKEN = 'FAKE-AUTH-TOKEN'; // obv this is only for testing, real auth token hidden
+// For testing
+const sqlite3 = require('sqlite3').verbose();
 
 // TIL about preflight requests
 app.options('/api', (req, res) => {
@@ -21,6 +23,40 @@ app.get('/api', (req, res) => {
 
 app.get('/health', (req, res) => {
   res.sendStatus(200);
+});
+
+app.get('/test', (req, res) => {
+  let results = { rows: [] };
+
+  let db = new sqlite3.Database('./data/test.db', sqlite3.OPEN_READONLY, (err) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log('Connected to the in-memory SQlite database.');
+  });
+
+  // Need to wrap this in a promise but I am running late
+  db.serialize(() => {
+    db.each(`SELECT id, name FROM test_table`, (err, row) => {
+      if (err) {
+        console.error(err.message);
+      }
+      console.log(row);
+      results.rows.push({
+        id: row.id,
+        name: row.name,
+      });
+    });
+    console.log(results);
+    db.close((err) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      console.log('Close the database connection.');
+    });
+    console.log('async hell');
+    res.json(results);
+  });
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
