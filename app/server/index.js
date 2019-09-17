@@ -16,6 +16,23 @@ app.options('/api', (req, res) => {
   res.send(200);
 });
 
+app.use(require('express-session')({
+  secret: process.env.APP_SECRET,
+  resave: true,
+  saveUninitialized: false
+}));
+
+const { ExpressOIDC } = require('@okta/oidc-middleware');
+const oidc = new ExpressOIDC({
+  issuer: `${process.env.OKTA_ORG_URL}/oauth2/default`,
+  client_id: process.env.OKTA_CLIENT_ID,
+  client_secret: process.env.OKTA_CLIENT_SECRET,
+  redirect_uri: `${process.env.HOST_URL}/authorization-code/callback`,
+  scope: 'openid profile'
+});
+
+app.use(oidc.router);
+
 app.get('/api', (req, res) => {
   console.log(req.headers);
   res.json(data);
