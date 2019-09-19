@@ -9,12 +9,34 @@ const TOKEN = 'FAKE-AUTH-TOKEN'; // obv this is only for testing, real auth toke
 // For testing
 const sqlite3 = require('sqlite3').verbose();
 
+app.use(express.json());
 // TIL about preflight requests
 app.options('/api', (req, res) => {
   res.set('Access-Control-Allow-Origin', 'http://localhost:9000');
   res.set('Access-Control-Allow-Methods', 'GET');
   res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Express-Auth-Token');
   res.send(200);
+});
+
+app.post('/api/flashcard/create', (req, res) => {
+
+  let front = req.body.front;
+  let back = req.body.back;
+
+  let db = new sqlite3.Database('./server/data/data.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log('Connected to the in-memory SQlite database.');
+  });
+  db.run('INSERT INTO flashcard_data (front, back) VALUES (?, ?);', [req.body.front, req.body.back], (e) => {
+    if (e) {
+      console.log(e);
+      res.sendStatus(400);
+    } else {
+      res.sendStatus(201);
+    }
+  });
 });
 
 app.use(require('express-session')({
