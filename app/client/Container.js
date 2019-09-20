@@ -1,6 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import FlashCard from './FlashCard';
+import FlashCardForm from './FlashCardForm';
 import './style.css';
 //const DATA_URL = 'https://www.dee-znutz.com/api';
 const DATA_URL = 'http://localhost:8888/api';
@@ -21,7 +22,6 @@ export default class Container extends React.Component {
       method: 'GET',
       mode: 'cors',
       headers: new Headers({
-        'foo': 'bar',
         'Express-Auth-Token': 'FAKE-AUTH-TOKEN',
         'Content-Type': 'application/json',
       })
@@ -70,6 +70,7 @@ export default class Container extends React.Component {
         >
           Next Card
         </button>
+        <FlashCardForm />
       </div>
     );
   }

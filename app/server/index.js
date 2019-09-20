@@ -15,7 +15,14 @@ app.options('/api', (req, res) => {
   res.set('Access-Control-Allow-Origin', 'http://localhost:9000');
   res.set('Access-Control-Allow-Methods', 'GET');
   res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Express-Auth-Token');
-  res.send(200);
+  res.sendStatus(200);
+});
+
+app.options('/api/flashcard/create', (req, res) => {
+  res.set('Access-Control-Allow-Origin', 'http://localhost:9000');
+  res.set('Access-Control-Allow-Methods', 'POST');
+  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Express-Auth-Token');
+  res.sendStatus(200);
 });
 
 app.post('/api/flashcard/create', (req, res) => {
