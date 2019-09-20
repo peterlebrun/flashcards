@@ -33,20 +33,8 @@ const DATA_URL = 'http://localhost:8888/api';
         front: this.state.front,
         back: this.state.back
       })
-    })
-      .then(response => console.log(response.json()));
-    /*
-      .then(data => {
-        let cardData = data.data;
-        let currentCard = _.sample(cardData); // This will break if cardData.length < 1
-        let displayText = currentCard.front;
-        this.setState((state, props) => ({
-          cardData,
-          currentCard,
-          displayText,
-        }));
-      });
-*/
+    });
+    // TODO Give user feedback on whether success or not
   }
 
   render() {
