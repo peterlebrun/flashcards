@@ -35,6 +35,7 @@
   "private": true,
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "dev": "webpack-dev-server --mode development --hot"
+    "dev": "webpack-dev-server --mode development --hot",
+    "serve": "node ./server/index.js"
   }
 }

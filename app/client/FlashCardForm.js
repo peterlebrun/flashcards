@@ -19,9 +19,8 @@ export default class FlashCardForm extends React.Component {
   }
 
   handleSubmit = e => {
-    console.log(this.state);
+    //console.log(this.state);
     e.preventDefault();
-const DATA_URL = 'http://localhost:8888/api';
     fetch('http://localhost:8888/api/flashcard/create' , {
       method: 'POST',
       mode: 'cors',

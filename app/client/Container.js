@@ -4,7 +4,7 @@ import FlashCard from './FlashCard';
 import FlashCardForm from './FlashCardForm';
 import './style.css';
 //const DATA_URL = 'https://www.dee-znutz.com/api';
-const DATA_URL = 'http://localhost:8888/api';
+const DATA_URL = 'http://localhost:8888/api/flashcards';
 
 export default class Container extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ export default class Container extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        let cardData = data.data;
+        let cardData = data;
         let currentCard = _.sample(cardData); // This will break if cardData.length < 1
         let displayText = currentCard.front;
         this.setState((state, props) => ({

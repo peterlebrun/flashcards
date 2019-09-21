@@ -2,3 +2,4 @@ node_modules
 .terraform
 *.tfvars
 .env
+yarn-error.log

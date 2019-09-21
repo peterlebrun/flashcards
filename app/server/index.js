@@ -11,7 +11,7 @@ const sqlite3 = require('sqlite3').verbose();
 
 app.use(express.json());
 // TIL about preflight requests
-app.options('/api', (req, res) => {
+app.options('/api/flashcards', (req, res) => {
   res.set('Access-Control-Allow-Origin', 'http://localhost:9000');
   res.set('Access-Control-Allow-Methods', 'GET');
   res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Express-Auth-Token');
@@ -25,8 +25,24 @@ app.options('/api/flashcard/create', (req, res) => {
   res.sendStatus(200);
 });
 
-app.post('/api/flashcard/create', (req, res) => {
+app.get('/api/flashcards', (req, res) => {
+  res.set('Access-Control-Allow-Origin', 'http://localhost:9000');
+  let db = new sqlite3.Database('./server/data/data.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log('Connected to the in-memory SQlite database.');
+  });
+  db.all('SELECT * FROM flashcard_data;', [], (err, rows) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    res.json(rows);
+  });
+});
 
+app.post('/api/flashcard/create', (req, res) => {
+  res.set('Access-Control-Allow-Origin', 'http://localhost:9000');
   let front = req.body.front;
   let back = req.body.back;
 
