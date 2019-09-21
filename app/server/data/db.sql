@@ -4,9 +4,9 @@ CREATE TABLE flashcard_data (
        );
 
 INSERT INTO flashcard_data (front, back) VALUES
-         ("parabéns", "congratulations")
-       , ("receita", "recipe")
-       , ("elefante", "elephant")
+         ("congratulations", "parabéns")
+       , ("recipe", "receita")
+       , ("elephant", "elefante")
        , ("sunday", "domingo")
        , ("monday", "segunda-feira")
        , ("tuesday", "terça-feira")
