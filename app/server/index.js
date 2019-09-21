@@ -3,8 +3,6 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = 8888;
-// This will be replaced with a proper database at some point no futuro
-const data = require('./data/data.json');
 const TOKEN = 'FAKE-AUTH-TOKEN'; // obv this is only for testing, real auth token hidden
 // For testing
 const sqlite3 = require('sqlite3').verbose();
