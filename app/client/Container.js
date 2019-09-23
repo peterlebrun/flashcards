@@ -1,6 +1,5 @@
 import React from 'react';
-import _ from 'lodash';
-import FlashCard from './FlashCard';
+import _ from 'lodash'; import FlashCard from './FlashCard';
 import FlashCardForm from './FlashCardForm';
 import './style.css';
 //const DATA_URL = 'https://www.dee-znutz.com/api';
@@ -60,6 +59,11 @@ export default class Container extends React.Component {
   render() {
     return (
       <div className="container">
+        <div className="navHeader">
+          <div className="navOption"><a href="#">Home</a></div>
+          <div className="navOption"><a href="#">All Cards</a></div>
+          <div className="navOption"><a href="#">Create New Card</a></div>
+        </div>
         <h1>Cartões de Estudo</h1>
         <FlashCard
           displayText={this.state.displayText}
