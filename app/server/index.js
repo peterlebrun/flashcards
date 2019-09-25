@@ -31,7 +31,7 @@ app.get('/api/flashcards', (req, res) => {
     }
     console.log('Connected to the in-memory SQlite database.');
   });
-  db.all('SELECT * FROM flashcard_data;', [], (err, rows) => {
+  db.all('SELECT * FROM flashcard;', [], (err, rows) => {
     if (err) {
       return console.error(err.message);
     }
@@ -50,7 +50,7 @@ app.post('/api/flashcard/create', (req, res) => {
     }
     console.log('Connected to the in-memory SQlite database.');
   });
-  db.run('INSERT INTO flashcard_data (front, back) VALUES (?, ?);', [req.body.front, req.body.back], (e) => {
+  db.run('INSERT INTO flashcard (front, back) VALUES (?, ?);', [req.body.front, req.body.back], (e) => {
     if (e) {
       console.log(e);
       res.sendStatus(400);

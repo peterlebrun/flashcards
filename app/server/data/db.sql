@@ -1,9 +1,17 @@
-CREATE TABLE flashcard_data (
-       front varchar(30),
-       back varchar(30)
+CREATE TABLE flashcard (
+       id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+       front VARCHAR(256),
+       back VARCHAR(256),
+       created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
        );
 
-INSERT INTO flashcard_data (front, back) VALUES
+CREATE TABLE review_attempt (
+       flashcard_id INTEGER,
+       attempt_time DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+       success INTEGER
+       );
+
+INSERT INTO flashcard (front, back) VALUES
          ("congratulations", "parabéns")
        , ("recipe", "receita")
        , ("elephant", "elefante")
@@ -31,7 +39,7 @@ INSERT INTO flashcard_data (front, back) VALUES
        , ("after", "atrás")
        , ("The bear wears a denim skirt", "O urso usa uma saia jeans")
        , ("I take off my coat", "Eu retiro meu casaco")
-       , ("Ela tira o terno dele", "She takes off his suit")
+       , ("She takes off his suit", "Ela tira o terno dele")
        , ("It is a salty sauce", "É um molho salgado")
        , ("The pineapple is bitter", "O abacaxi é amargo")
        , ("The target", "O alvo")
@@ -163,4 +171,5 @@ INSERT INTO flashcard_data (front, back) VALUES
        , ("What is the distance from here to the museum?", "Qual é a distancia daqui até o museu?")
        , ("He reads about the structure of words.", "Ele lê das estrutura sobre palavras")
        , ("They are sleeping on a big bed.", "Elas estão dormindo em uma grande cama")
+       , ("perhaps", "talvez")
        ;
