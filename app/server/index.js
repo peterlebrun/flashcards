@@ -23,6 +23,14 @@ app.options('/api/flashcard/create', (req, res) => {
   res.sendStatus(200);
 });
 
+// TIL about preflight requests
+app.options('/api/attempt/create', (req, res) => {
+  res.set('Access-Control-Allow-Origin', 'http://localhost:9000');
+  res.set('Access-Control-Allow-Methods', 'POST');
+  res.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With, Express-Auth-Token');
+  res.sendStatus(200);
+});
+
 app.get('/api/flashcards', (req, res) => {
   res.set('Access-Control-Allow-Origin', 'http://localhost:9000');
   let db = new sqlite3.Database('./server/data/data.db', sqlite3.OPEN_READWRITE, (err) => {
@@ -51,6 +59,28 @@ app.post('/api/flashcard/create', (req, res) => {
     console.log('Connected to the in-memory SQlite database.');
   });
   db.run('INSERT INTO flashcard (front, back) VALUES (?, ?);', [req.body.front, req.body.back], (e) => {
+    if (e) {
+      console.log(e);
+      res.sendStatus(400);
+    } else {
+      res.sendStatus(201);
+    }
+  });
+});
+
+
+app.post('/api/attempt/create', (req, res) => {
+  res.set('Access-Control-Allow-Origin', 'http://localhost:9000');
+  let flashcardId = req.body.flashcard_id;
+  let reviewSuccess = req.body.review_success === "true" ? 1 : 0;
+
+  let db = new sqlite3.Database('./server/data/data.db', sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    console.log('Connected to the in-memory SQlite database.');
+  });
+  db.run('INSERT INTO attempt (flashcard_id, success) VALUES (?, ?);', [flashcardId, reviewSuccess], (e) => {
     if (e) {
       console.log(e);
       res.sendStatus(400);
