@@ -5,7 +5,7 @@ CREATE TABLE flashcard (
        created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
        );
 
-CREATE TABLE review_attempt (
+CREATE TABLE attempt (
        flashcard_id INTEGER,
        attempt_time DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
        success INTEGER
