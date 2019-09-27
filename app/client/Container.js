@@ -67,6 +67,7 @@ export default class Container extends React.Component {
         <h1>Cartões de Estudo</h1>
         <FlashCard
           displayText={this.state.displayText}
+          id={this.state.currentCard.id}
           onClick={this.handleCardClick}/>
         <button
           className="nextCardButton"
