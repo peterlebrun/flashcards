@@ -163,7 +163,7 @@ INSERT INTO flashcard (front, back) VALUES
        , ("For you I would do anything.", "Por você eu faria qualquer coisa")
        , ("Do you want a ride?", "Você quer uma carona?")
        , ("I liked what I saw", "Eu gostei do que vi")
-       , ("I am new in town, can you teach me the way to your heart?", "Eu so novo na cidade, pode me ensinar o caminho até seu coração?")
+       , ("I am new in town, can you teach me the way to your heart?", "Eu sou novo na cidade, pode me ensinar o caminho até seu coração?")
        , ("Fortunately, he comes back tomorrow.", "Felizmente, ele volta amanhã")
        , ("What is the distance from here to the hotel?", "Qual é a distância daqui ao hotel?")
        , ("What did I do now?", "O que eu fiz agora?")
