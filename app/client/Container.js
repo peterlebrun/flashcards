@@ -56,6 +56,38 @@ export default class Container extends React.Component {
     });
   }
 
+  handleIncorrectClick = e => {
+    e.preventDefault();
+    fetch('http://localhost:8888/api/attempt/create' , {
+      method: 'POST',
+      mode: 'cors',
+      headers: new Headers({
+        'Express-Auth-Token': 'FAKE-AUTH-TOKEN',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({
+        flashcard_id: this.state.currentCard.id,
+        review_success: 'false',
+      })
+    });
+  };
+
+  handleCorrectClick = e => {
+    e.preventDefault();
+    fetch('http://localhost:8888/api/attempt/create' , {
+      method: 'POST',
+      mode: 'cors',
+      headers: new Headers({
+        'Express-Auth-Token': 'FAKE-AUTH-TOKEN',
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({
+        flashcard_id: this.state.currentCard.id,
+        review_success: 'true',
+      })
+    });
+  }
+
   render() {
     return (
       <div className="container">
@@ -69,6 +101,18 @@ export default class Container extends React.Component {
           displayText={this.state.displayText}
           id={this.state.currentCard.id}
           onClick={this.handleCardClick}/>
+        <button
+          className="incorrectButton"
+          onClick={this.handleIncorrectClick}
+        >
+          Incorrect
+        </button>
+        <button
+          className="correctButton"
+          onClick={this.handleCorrectClick}
+        >
+          Correct
+        </button>
         <button
           className="nextCardButton"
           onClick={this.handleButtonClick}

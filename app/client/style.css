@@ -14,6 +14,22 @@
     vertical-align: middle;
 }
 
+.incorrectButton {
+    height: 40px;
+    width: 100px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: red;
+}
+
+.correctButton {
+    height: 40px;
+    width: 100px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: green;
+}
+
 .nextCardButton {
     height: 40px;
     width: 100px;
