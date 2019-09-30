@@ -12,7 +12,8 @@ export default class Container extends React.Component {
       cardData: [],
       currentCard: {},
       displayText: '',
-      isFront: true
+      isFront: true,
+      numCards: 1,
     };
   }
 
@@ -49,10 +50,13 @@ export default class Container extends React.Component {
 
   handleButtonClick = () => {
     let currentCard = _.sample(this.state.cardData);
-    this.setState({
-      currentCard,
-      displayText: currentCard.front,
-      isFront: true,
+    this.setState((state, props) => {
+      return {
+        currentCard,
+        displayText: currentCard.front,
+        isFront: true,
+        numCards: state.numCards + 1,
+      };
     });
   }
 
@@ -97,6 +101,7 @@ export default class Container extends React.Component {
           <div className="navOption"><a href="#">Create New Card</a></div>
         </div>
         <h1>Cartões de Estudo</h1>
+        <h2>Viewing Card {this.state.numCards}</h2>
         <FlashCard
           displayText={this.state.displayText}
           id={this.state.currentCard.id}
