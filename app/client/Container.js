@@ -2,7 +2,6 @@ import React from 'react';
 import _ from 'lodash'; import FlashCard from './FlashCard';
 import FlashCardForm from './FlashCardForm';
 import './style.css';
-//const DATA_URL = 'https://www.dee-znutz.com/api';
 const DATA_URL = 'http://localhost:8888/api/flashcards';
 
 export default class Container extends React.Component {
@@ -73,7 +72,8 @@ export default class Container extends React.Component {
         flashcard_id: this.state.currentCard.id,
         review_success: 'false',
       })
-    });
+    })
+      .then(() => this.handleButtonClick());
   };
 
   handleCorrectClick = e => {
@@ -89,7 +89,8 @@ export default class Container extends React.Component {
         flashcard_id: this.state.currentCard.id,
         review_success: 'true',
       })
-    });
+    })
+      .then(() => this.handleButtonClick());
   }
 
   render() {
@@ -117,12 +118,6 @@ export default class Container extends React.Component {
           onClick={this.handleCorrectClick}
         >
           Correct
-        </button>
-        <button
-          className="nextCardButton"
-          onClick={this.handleButtonClick}
-        >
-          Next Card
         </button>
         <FlashCardForm />
       </div>
