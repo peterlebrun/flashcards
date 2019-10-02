@@ -12,7 +12,8 @@ export default class Container extends React.Component {
       currentCard: {},
       displayText: '',
       isFront: true,
-      numCards: 1,
+      numCards: 0,
+      numCorrect: 0,
     };
   }
 
@@ -47,7 +48,7 @@ export default class Container extends React.Component {
     });
   }
 
-  handleButtonClick = () => {
+  handleButtonClick = (isCorrect) => {
     let currentCard = _.sample(this.state.cardData);
     this.setState((state, props) => {
       return {
@@ -55,6 +56,7 @@ export default class Container extends React.Component {
         displayText: currentCard.front,
         isFront: true,
         numCards: state.numCards + 1,
+        numCorrect: isCorrect ? state.numCorrect + 1 : state.numCorrect,
       };
     });
   }
@@ -73,7 +75,7 @@ export default class Container extends React.Component {
         review_success: 'false',
       })
     })
-      .then(() => this.handleButtonClick());
+      .then(() => this.handleButtonClick(false));
   };
 
   handleCorrectClick = e => {
@@ -90,7 +92,7 @@ export default class Container extends React.Component {
         review_success: 'true',
       })
     })
-      .then(() => this.handleButtonClick());
+      .then(() => this.handleButtonClick(true));
   }
 
   render() {
@@ -102,7 +104,7 @@ export default class Container extends React.Component {
           <div className="navOption"><a href="#">Create New Card</a></div>
         </div>
         <h1>Cartões de Estudo</h1>
-        <h2>Viewing Card {this.state.numCards}</h2>
+        <h2>{this.state.numCorrect}/{this.state.numCards}</h2>
         <FlashCard
           displayText={this.state.displayText}
           id={this.state.currentCard.id}
