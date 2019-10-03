@@ -11,6 +11,8 @@ CREATE TABLE attempt (
        success INTEGER
        );
 
+CREATE INDEX idx_attempt_flashcard_id ON attempt (flashcard_id);
+
 INSERT INTO flashcard (front, back) VALUES
          ("congratulations", "parabéns")
        , ("recipe", "receita")
