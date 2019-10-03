@@ -39,7 +39,19 @@ app.get('/api/flashcards', (req, res) => {
     }
     console.log('Connected to the in-memory SQlite database.');
   });
-  db.all('SELECT * FROM flashcard;', [], (err, rows) => {
+  let query = `
+SELECT
+    flashcard.id AS 'id'
+  , flashcard.front AS 'front'
+  , flashcard.back AS 'back'
+  , SUM(IFNULL(attempt.success, 0)) AS 'attempts'
+FROM flashcard
+LEFT JOIN attempt ON flashcard.id = attempt.flashcard_id
+GROUP BY flashcard.id
+ORDER BY attempts ASC
+;
+`;
+  db.all(query, [], (err, rows) => {
     if (err) {
       return console.error(err.message);
     }

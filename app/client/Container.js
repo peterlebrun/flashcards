@@ -28,13 +28,14 @@ export default class Container extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        let cardData = data;
-        let currentCard = _.sample(cardData); // This will break if cardData.length < 1
+        // data comes back pre-sorted by recency
+        let currentCard = data[0]; // This will break if cardData.length < 1
+        let cardData = data.slice(1);
         let displayText = currentCard.front;
         this.setState((state, props) => ({
-          cardData,
           currentCard,
           displayText,
+          cardData,
         }));
       });
   }
@@ -49,10 +50,11 @@ export default class Container extends React.Component {
   }
 
   handleButtonClick = (isCorrect) => {
-    let currentCard = _.sample(this.state.cardData);
     this.setState((state, props) => {
+      let currentCard = this.state.cardData[0];
       return {
         currentCard,
+        cardData: this.state.cardData.slice(1),
         displayText: currentCard.front,
         isFront: true,
         numCards: state.numCards + 1,
