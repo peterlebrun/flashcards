@@ -32,8 +32,9 @@ export default class FlashCardForm extends React.Component {
         front: this.state.front,
         back: this.state.back
       })
-    });
+    })
     // TODO Give user feedback on whether success or not
+      .then(() => this.setState({front: '', back: ''}));
   }
 
   render() {
